@@ -1,7 +1,7 @@
 {
-  "name": "is-components-new",
+  "name": "is-components-new-tohno-new",
   "description": "Is components",
-  "version": "0.0.4",
+  "version": "0.0.1",
   "license": "MIT",
   "type": "module",
   "main": "dist/index.js",

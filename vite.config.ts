@@ -3,7 +3,6 @@ import path from 'node:path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
-import vue from '@vitejs/plugin-vue';
 import svgLoader from 'vite-svg-loader';
 
 const files = fs.readdirSync('./src/components').filter((file) => file.includes('Ui'));
