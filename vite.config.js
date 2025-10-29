@@ -1,14 +1,18 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { defineConfig } from 'vite';
+import vuePlugin from '@vitejs/plugin-vue';
 import dts from 'vite-plugin-dts';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import svgLoader from 'vite-svg-loader';
+
+
 var files = fs.readdirSync('./src/components').filter(function (file) { return file.includes('Ui'); });
 var components = files.reduce(function (obj, component) {
     obj[component.split('.')[0]] = "src/components/".concat(component, "/").concat(component, ".vue");
     return obj;
 }, {});
+
 export default defineConfig({
     build: {
         target: 'es2022',
@@ -29,7 +33,7 @@ export default defineConfig({
         },
     },
     plugins: [
-        vue(),
+        vuePlugin(),
         svgLoader(),
         dts({
             cleanVueFileName: true,
@@ -58,13 +62,13 @@ export default defineConfig({
                     src: 'src/components/index.ts',
                     dest: '',
                     rename: 'index.js',
-                    transform: function (contents) { return contents.toString().replace(/.(vue|ts)/g, '.js'); },
+                    transform: function (contents) { return contents.toString().replace(/\.vue/g, '.js').replace(/\.ts/g, '.js'); },
                 },
                 {
                     src: 'src/components/index.ts',
                     dest: '',
                     rename: 'index.d.ts',
-                    transform: function (contents) { return contents.toString().replace(/.(vue|ts)/g, ''); },
+                    transform: function (contents) { return contents.toString().replace(/\.vue/g, '').replace(/\.ts/g, ''); },
                 },
             ],
         }),
